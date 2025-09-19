@@ -1,18 +1,23 @@
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
-        int l= nums.size(); vector<int> ans(l);
-         k = k % l;
-        for(int i=0;i<l;i++)
-        {
-            
-            ans[(i+k)%l]=nums[i];
+    int n = nums.size();
+        k = k % n;  // handle k > n
 
-        }
-        nums=ans;
-       for (int x : nums) {
-            cout << x << " ";
-        }
-        cout << endl;
+        // helper function to reverse subarray
+        auto reverse = [&](int left, int right) 
+        {
+            while (left < right)
+             {
+                swap(nums[left], nums[right]);
+                left++;
+                right--;
+            }
+    };
+     reverse(0, n - 1);
+        // Step 2: reverse first k elements
+        reverse(0, k - 1);
+        // Step 3: reverse rest
+        reverse(k, n - 1);
     }
 };
