@@ -1,40 +1,24 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-         int n = nums.size();
-        int count1 = 0, count2 = 0;
-        int candidate1 = 0, candidate2 = 0;
+        vector<int> ls;
+        map<int,int> mpp;
+        int n=nums.size();
+        int mini=(int)(n/3)+1;
+        for(int i=0;i<n;i++)
+        {
+            mpp[nums[i]]++;
+            if(mpp[nums[i]]==mini)
+            {
+                ls.push_back(nums[i]);
+            }
+            if(ls.size()==2)
+            break;
 
-        // 1st pass: find candidates
-        for(int num : nums) {
-            if(num == candidate1) count1++;
-            else if(num == candidate2) count2++;
-            else if(count1 == 0) {
-                candidate1 = num;
-                count1 = 1;
-            }
-            else if(count2 == 0) {
-                candidate2 = num;
-                count2 = 1;
-            }
-            else {
-                count1--;
-                count2--;
-            }
+
         }
+        sort(ls.begin(),ls.end());
+        return ls;
 
-        // 2nd pass: verify candidates
-        count1 = count2 = 0;
-        for(int num : nums) {
-            if(num == candidate1) count1++;
-            else if(num == candidate2) count2++;
-        }
-
-        vector<int> result;
-        if(count1 > n/3) result.push_back(candidate1);
-        if(count2 > n/3) result.push_back(candidate2);
-
-        return result;
-        
     }
 };
