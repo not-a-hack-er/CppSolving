@@ -6,8 +6,8 @@ public:
         priority_queue<pair<int ,pair<int,int>>> maxheap;
         for(int i=0;i<n;i++)
         {
-            int dist=arr[i][0]*arr[i][0]+arr[i][1]*arr[i][1];
-            maxheap.push({dist,{arr[i][0],arr[i][1]}});
+            
+            maxheap.push({arr[i][0]*arr[i][0]+arr[i][1]*arr[i][1],{arr[i][0],arr[i][1]}});
             if(maxheap.size()>k)
             maxheap.pop();
         }
