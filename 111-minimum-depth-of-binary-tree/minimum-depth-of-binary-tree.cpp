@@ -24,7 +24,7 @@ public:
         if (root->right == nullptr) return 1 + minDepth(root->left);
 
     
-        return 1 + std::min(minDepth(root->left), minDepth(root->right));
+        return 1 + min(minDepth(root->left), minDepth(root->right));
         
     }
 };
