@@ -10,42 +10,19 @@
  */
 class Solution {
 public:
-ListNode *reverseList(ListNode *head) {
-
-    ListNode *curr = head, *prev = nullptr, *next;
-
-    // Traverse all the nodes of Linked List
-    while (curr != nullptr) {
-
-        // Store next
-        next = curr->next;
-
-        // Reverse current node's next pointer
-        curr->next = prev;
-
-        // Move pointers one position ahead
-        prev = curr;
-        curr = next;
+ListNode* curr;
+bool isPalindrome(ListNode* head) {
+       curr = head;
+        return check(head);
     }
-
-    return prev;
-}
-    bool isPalindrome(ListNode* head) {
-        if (!head || !head->next) return true;
-    ListNode* slow = head, *fast = head;
-    while (fast->next && fast->next->next) {
-        slow = slow->next;
-        fast = fast->next->next;
+bool check(ListNode* node) {
+        if (node == nullptr) return true;
+        bool isRestPalindrome = check(node->next);
+        if (!isRestPalindrome || curr->val != node->val) {
+            return false;
+        }
+        curr = curr->next;
+        return true;
     }
-    ListNode* second = reverseList(slow->next);
-    ListNode* first = head;
-
-    while (second) {
-        if (first->val != second->val) return false;
-        first = first->next;
-        second = second->next;
-    }
-    return true;
-        
-    }
+    
 };
