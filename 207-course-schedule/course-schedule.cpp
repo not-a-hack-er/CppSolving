@@ -1,43 +1,39 @@
 class Solution {
 public:
-    bool isCyclicDFS(int node,
-                     unordered_map<int,int>& visited,
-                     unordered_map<int,bool>& dfsVisited,
-                     unordered_map<int,list<int>>& adj) {
-
-        visited[node] = 1;
-        dfsVisited[node] = 1;
-
-        for (auto neighbour : adj[node]) {
-            if (!visited[neighbour]) {
-                if (isCyclicDFS(neighbour, visited, dfsVisited, adj))
+bool isCyclicDFS(int src,vector<bool> &vis, vector<bool> &recPath, vector<vector<int>>& edges)
+{
+    vis[src]=true;
+    recPath[src]=true;
+    for(int i=0;i<edges.size();i++)
+    {
+        int v=edges[i][0];
+        int u=edges[i][1];
+        if(u==src){
+            if(!vis[v]){
+                if(isCyclicDFS(v,vis,recPath,edges)){
                     return true;
+                }}
+                else if(recPath[v]){
+                    return true;
+                }
             }
-            else if (dfsVisited[neighbour]) {
-                return true;
-            }
-        }
-
-        dfsVisited[node] = 0;
-        return false;
+        
     }
+    recPath[src]=false;
+    return false;
+}
 
     bool canFinish(int n, vector<vector<int>>& edges) {
-        unordered_map<int, list<int>> adj;
-
-        for (int i = 0; i < edges.size(); i++) {
-            int u = edges[i][0];
-            int v = edges[i][1];
-            adj[v].push_back(u);   
-        }
-
-        unordered_map<int,int> visited;
-        unordered_map<int,bool> dfsVisited;
-
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                if (isCyclicDFS(i, visited, dfsVisited, adj))
+        vector<bool> vis(n,false);
+        vector<bool> recPath(n,false);
+        for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
+                if(isCyclicDFS(i,vis,recPath,edges))
+                {
                     return false;
+                }
             }
         }
         return true;
