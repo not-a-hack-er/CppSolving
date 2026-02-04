@@ -23,9 +23,9 @@ public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
        n=nums.size();
        unordered_map<int,int> mp;
-       for(int &num:nums)
+       for(int i:nums)
        {
-        mp[num]++;
+        mp[i]++;
        }
        vector<int> temp;
        solve(mp,temp);
