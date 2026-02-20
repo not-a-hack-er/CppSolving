@@ -12,10 +12,12 @@ public:
         while(!pq.empty())
         {
             auto p=pq.top();
-            pq.pop();
+            
 
             int wt=p.first;
             int node=p.second;
+
+            pq.pop();
 
             if(inMST[node]==true)
             continue;
