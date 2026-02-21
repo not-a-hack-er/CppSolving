@@ -86,9 +86,9 @@ int getMSTWeight(int n, vector<vector<int>>& edges, int exclude_edge_idx, int in
         for(int i=0;i<edges.size();i++)
         sortedEdges[i].push_back(i);
         
-        sort(sortedEdges.begin(),sortedEdges.end(),[](vector<int> &a,vector<int> &b)
+        sort(sortedEdges.begin(),sortedEdges.end(),[](vector<int> &b,vector<int> &a)
         {
-            return a[2]<b[2];
+            return b[2]<a[2];
         });
 
         int originalWt=getMSTWeight(n,sortedEdges,-1,-1);
