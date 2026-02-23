@@ -9,7 +9,7 @@ public:
            sp.insert(c);
            i++,j++;
         }
-        if(sp.size()==(1<<k))
+        if(sp.size()==pow(2,k))
         return true;
         
         return false;
