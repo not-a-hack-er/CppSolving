@@ -16,8 +16,8 @@ bool canEat(vector<int>& piles, int h, int k)
         while(low<=high)
         {
             int mid=(low+high)/2;
-           bool c=canEat(piles,h,mid);
-           if(c)
+           
+           if(canEat(piles,h,mid))
            {
             high=mid-1;
            }
