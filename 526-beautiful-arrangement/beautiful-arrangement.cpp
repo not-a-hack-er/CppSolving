@@ -2,24 +2,31 @@ class Solution {
 public:
     int result = 0;
 
-    void dfs(vector<int>& nums, int val, int n) {
-        if(val > n) {
+    void dfs(vector<int>& nums, int val) {
+        if (val == 0) {
             result++;
             return;
         }
 
-        for(int i = 1; i <= n; i++) {
-            if(nums[i] == 0 && (val % i == 0 || i % val == 0)) {
-                nums[i] = val;
-                dfs(nums, val + 1, n);
-                nums[i] = 0;
+        for (int i = val; i > 0; i--) {
+            swap(nums[i], nums[val]);
+
+            if (nums[val] % val == 0 || val % nums[val] == 0) {
+                dfs(nums, val - 1);
             }
+
+            swap(nums[i], nums[val]); // backtrack
         }
     }
 
     int countArrangement(int n) {
-        vector<int> nums(n + 1, 0);
-        dfs(nums, 1, n);
+        vector<int> nums(n + 1);
+
+        for (int i = 1; i <= n; i++)
+            nums[i] = i;
+
+        dfs(nums, n);
+
         return result;
     }
 };
