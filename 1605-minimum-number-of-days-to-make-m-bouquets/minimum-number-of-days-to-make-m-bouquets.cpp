@@ -22,7 +22,7 @@ public:
 
     int minDays(vector<int>& arr, int m, int k) {
 
-        long long val = 1LL * m * k;
+        long long val = 1LL*m*k;
         if(val > arr.size()) return -1;
 
         int mini = INT_MAX, maxi = INT_MIN;
