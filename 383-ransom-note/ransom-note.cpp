@@ -2,20 +2,22 @@ class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
         map<char,int> mp1;
-        map<char,int> mp2;
-        for(auto it:ransomNote)
+        
+        for(auto it:magazine)
         {
             mp1[it]++;
         }
-        for(auto it:magazine)
+        for(auto it:ransomNote)
         {
-            mp2[it]++;
-        }
-        for(auto it:mp1)
-        {
-            if(mp2[it.first]<it.second)
+            if(mp1[it]==0)
             return false;
+            mp1[it]--;
         }
+        // for(auto it:mp1)
+        // {
+        //     if(mp2[it.first]<it.second)
+        //     return false;
+        // }
         return true;
         
     }
