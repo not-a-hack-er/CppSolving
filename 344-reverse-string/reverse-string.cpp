@@ -1,18 +1,14 @@
 class Solution {
 public:
-    void reverseString(vector<char>& s) {
-        int st=0;int end =s.size()-1;
-        while(st<end)
-        {
-swap(s[st],s[end]);
-st++;
-end--;
-        }
-        for(int i=0;i<s.size();i++)
-        {
-            cout<<s[i];
-        }
+    void solve(vector<char>& s, int l, int r) {
+        if(l >= r) return;
+
+        swap(s[l], s[r]);
+
+        solve(s, l + 1, r - 1);
     }
-  
-    
+
+    void reverseString(vector<char>& s) {
+        solve(s, 0, s.size() - 1);
+    }
 };
