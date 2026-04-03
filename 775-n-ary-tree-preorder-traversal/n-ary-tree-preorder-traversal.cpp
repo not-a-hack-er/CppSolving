@@ -20,21 +20,20 @@ public:
 
 class Solution {
 public:
+    
+    void solve(Node* root, vector<int>& ans) {
+        if(root == NULL) return;
+
+        ans.push_back(root->val); // root
+
+        for(auto child : root->children) {
+            solve(child, ans);   // children
+        }
+    }
+
     vector<int> preorder(Node* root) {
         vector<int> ans;
-        if(root==NULL)
-        {
-            return ans;
-        }
-        fnc( root ,ans);
+        solve(root, ans);
         return ans;
-    }
-    void fnc(Node* root,vector<int> &ans)
-    {
-        ans.push_back(root->val);
-        for(int i=0;i<root->children.size();i++)
-        {
-            fnc(root->children[i],ans);
-        }
     }
 };
