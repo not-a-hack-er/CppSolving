@@ -2,7 +2,8 @@ class Solution {
 public:
     void bfsRecursive(vector<vector<int>>& grid, vector<pair<int, int>>& currentLevel, int dist, int& result) {
         
-        if (currentLevel.empty()) return;
+        if (currentLevel.empty())
+        return;
 
         vector<pair<int, int>> nextLevel;
         int n = grid.size();
