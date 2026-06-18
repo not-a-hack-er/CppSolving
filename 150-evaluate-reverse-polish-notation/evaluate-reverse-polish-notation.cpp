@@ -1,20 +1,13 @@
 class Solution {
 public:
-int operate(int a, int b,string t)
-{
-    if(t=="+")
-    return a+b;
-    if(t=="-")
-    return a-b;
-    if(t=="*")
-    return (long)a*(long)b;
-    if(t=="/")
-    return a/b;
-    return -1;
-    
-}
     int evalRPN(vector<string>& tokens) {
         stack<int> st;
+        unordered_map<string, function<int(int,int)>> mp={
+            {"+",[](int a,int b) {return a+b;}},
+            {"-",[](int a,int b) {return a-b;}},
+            {"*",[](int a,int b) {return a*b;}},
+            {"/",[](int a,int b) {return a/b;}}
+        };
         int result=0;
         for(string& t:tokens)
         {
@@ -26,7 +19,7 @@ int operate(int a, int b,string t)
                 int a = st.top();
                 st.pop();
 
-                result = operate(a,b,t);
+                result = mp[t](a,b);
                 st.push(result);
             }
             else{
