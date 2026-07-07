@@ -1,28 +1,22 @@
 class Solution {
 public:
+int solve(int m,int n,vector<vector<int>>& dp){
+    if(m==1 && n==1)
+    return 1;
+
+    if(m<=0 || n<=0)
+    return 0;
+
+    if(dp[m][n]!=-1)
+    return dp[m][n];
+
+    int up = solve(m-1,n,dp);
+    int down = solve(m,n-1,dp);
+
+    return dp[m][n]=up+down;
+}
     int uniquePaths(int m, int n) {
-     
-        int grid[m][n];
-
-       
-        for (int i = 0; i < m; i++) {
-            grid[i][0] = 1;
-        }
-
-      
-        for (int j = 0; j < n; j++) {
-            grid[0][j] = 1;
-        }
-
-        
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                
-                grid[i][j] = grid[i - 1][j] + grid[i][j - 1];
-            }
-        }
-
-        
-        return grid[m - 1][n - 1];
+        vector<vector<int>> dp(m+1,vector<int>(n+1,-1));
+        return solve(m,n,dp);
     }
 };
