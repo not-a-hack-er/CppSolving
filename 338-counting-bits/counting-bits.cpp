@@ -6,7 +6,11 @@ public:
             return result;
         result[0]=0;
         for(int i=1;i<=n;i++){
-            result[i]=__builtin_popcount(i);
+            if(i%2==0)
+                result[i]=result[i/2];
+            else
+                result[i]=result[i/2]+1;
+
         }
         return result;
     }
