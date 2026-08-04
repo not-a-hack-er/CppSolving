@@ -10,30 +10,20 @@
  * };
  */
 class Solution {
-
-    
-     pair<int,int> diameterFast(TreeNode* root) {
-        //base case
-        if(root == NULL) {
-            pair<int,int> p = make_pair(0,0);
-            return p;
-        }
-        
-        pair<int,int> left = diameterFast(root->left);
-        pair<int,int> right = diameterFast(root->right);
-        
-        int op1 = left.first;
-        int op2 = right.first;
-        int op3 = left.second + right.second + 1;
-        
-        pair<int,int> ans;
-        ans.first = max(op1, max(op2, op3));
-        ans.second = max(left.second , right.second) + 1;
-
-        return ans;
-    }
 public:
+int maxDepth(TreeNode* root) {
+         if (root == nullptr) return 0;
+        return 1 + max(maxDepth(root->left), maxDepth(root->right));
+    }
+    int maxi=0;
     int diameterOfBinaryTree(TreeNode* root) {
-        return diameterFast(root).first-1;
+        if(root==NULL)
+            return 0;
+        int lh=maxDepth(root->left);
+        int rh=maxDepth(root->right);
+        maxi=max(maxi,lh+rh);
+        diameterOfBinaryTree(root->left);
+        diameterOfBinaryTree(root->right);
+        return maxi;
     }
 };
