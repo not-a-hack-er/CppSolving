@@ -11,37 +11,17 @@
  */
 class Solution {
 public:
- pair<bool, int> isBalancedFast(TreeNode* root) {
-                // base case
-        if(root == NULL)
-        {
-            pair<bool, int> p = make_pair(true, 0);
-            return p;
-        }
-        
-        pair<int,int> left = isBalancedFast(root->left);
-        pair<int,int> right = isBalancedFast(root->right);
-        
-        
-        bool leftAns = left.first;
-        bool rightAns = right.first;
-        
-        bool diff = abs (left.second - right.second ) <=1;
-        
-        pair<bool,int> ans;
-        ans.second = max(left.second, right.second) + 1;
-        
-        if(leftAns && rightAns && diff) {
-           ans.first = true;
-        }
-        else
-        {
-            ans.first = false;
-        }
-        return ans;
+int maxDepth(TreeNode* root) {
+         if (root == nullptr) return true;
+        return 1 + max(maxDepth(root->left), maxDepth(root->right));
     }
-    
     bool isBalanced(TreeNode* root) {
-         return isBalancedFast(root).first;
+        if(root==NULL)
+            return true;
+        if(abs(maxDepth(root->left)-maxDepth(root->right))>1)
+            return false;
+        // else
+        //     return true;
+        return isBalanced(root->left) && isBalanced(root->right);
     }
 };
