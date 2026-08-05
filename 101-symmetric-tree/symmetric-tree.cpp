@@ -12,10 +12,11 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
-        // A null tree is technically symmetric
-        if (root == nullptr) return true;
         
-        // Start comparing the left and right subtrees
+        if (root == nullptr) 
+        return true;
+        
+        
         return isMirror(root->left, root->right);
     }
 
