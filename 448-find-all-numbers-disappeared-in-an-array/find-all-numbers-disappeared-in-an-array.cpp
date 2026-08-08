@@ -4,8 +4,8 @@ public:
         vector<int> ans;
         int n=nums.size();
         sort(nums.begin(),nums.end());
-        int mn=*min_element(nums.begin(),nums.end());
-        int mm=*max_element(nums.begin(),nums.end());
+        // int mn=*min_element(nums.begin(),nums.end());
+        // int mm=*max_element(nums.begin(),nums.end());
         int k=0;
         for(int i=1;i<=n;i++)
         {
