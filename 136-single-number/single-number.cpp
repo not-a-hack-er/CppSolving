@@ -1,13 +1,10 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        map<int,int> mp;
-        for(int it:nums){
-            mp[it]++;
+        int s=0;
+        for(int n:nums){
+            s^=n;
         }
-        for(auto it:mp)
-            if(it.second==1)
-                return it.first;
-        return -1;
+        return s;
     }
 };
