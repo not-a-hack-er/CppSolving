@@ -1,1 +1,1 @@
-<h2>peak-index-in-a-mountain-array Notes</h2><hr>[ Time taken: 4m 15s ]
+<h2>peak-index-in-a-mountain-array Notes</h2><hr>[ Time taken: 5m 29s ]
