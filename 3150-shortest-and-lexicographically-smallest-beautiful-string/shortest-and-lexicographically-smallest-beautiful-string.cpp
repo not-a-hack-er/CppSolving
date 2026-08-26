@@ -3,8 +3,8 @@ public:
     string shortestBeautifulSubstring(string s, int k) {
         string ans="";
         for(int i=0;i<s.size();i++){
-            if(s[i]!='1')
-            continue;
+            // if(s[i]!='1')
+            // continue;
             int c=0;
             for(int j=i;j<s.size();j++){
                 if(s[j]=='1')
