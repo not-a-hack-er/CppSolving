@@ -5,7 +5,8 @@ public:
         for(int i=0;i<s.size();i++){
             if(s[i]==(i%2)+'0')
                 c1++;
-             if(s[i]!=(i%2)+'0')           
+             //if(s[i]!=(i%2)+'0') 
+             else          
                 c2++;
         }
         return min(c1,c2);
