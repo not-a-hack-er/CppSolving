@@ -1,29 +1,43 @@
 class Solution {
 public:
-    //vector<vector<bool>>(m,vector<int>(n,false));
-    int count=0;
-    int dfs(vector<vector<int>>& grid,int r,int c){
-        if(r<0 || c<0 || r>=grid.size() || c>=grid[0].size())
-            return 1;
-        if(grid[r][c]==0)
-            return 1;
-            
-        if(grid[r][c]==2)
-            return 0;
-        grid[r][c]=2;
-        return dfs(grid,r+1,c)+
-        dfs(grid,r,c+1)+
-        dfs(grid,r-1,c)+
-        dfs(grid,r,c-1);
-    }
-    int islandPerimeter(vector<vector<int>>& grid) {
+    int bfs(vector<vector<int>>& grid, int sr, int sc) {
         int m=grid.size();
         int n=grid[0].size();
-       
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(grid[i][j]==1)
-                return dfs(grid,i,j);
+        vector<vector<bool>> vis(m,vector<bool>(n,false));
+        queue<pair<int,int>> q;
+        q.push({sr,sc});
+        vis[sr][sc]=true;
+        int p=0;
+        int dr[] ={1,-1,0,0};
+        int dc[] ={0,0,1,-1};
+        while(!q.empty()){
+            int r=q.front().first;
+            int c=q.front().second;
+            q.pop();
+            for(int k=0;k<4;k++){
+                int nr=r+dr[k];
+                int nc=c+dc[k];
+                if(nr<0 || nc<0 || nr>=m || nc>=n)
+                p++;
+                else if(grid[nr][nc]==0)
+                p++;
+                else if(!vis[nr][nc]){
+                    vis[nr][nc]=true;
+                    q.push({nr,nc});
+                }
+            }
+        }
+        return p;
+
+    }
+    int islandPerimeter(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1)
+                    return bfs(grid, i, j);
             }
         }
         return 0;
