@@ -1,61 +1,53 @@
 class Solution {
 public:
+    int m, n;
+    vector<vector<int>> time;
 
-    int orangesRotting(vector<vector<int>>& grid)
-     {
-        int n=grid.size();
-        int m=grid[0].size();
-        if (grid.empty()) 
-        return 0;
-        queue<pair<pair<int, int>,int>> q;
-        vector<vector<int>> vis(n, vector<int>(m, 0));
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < grid[0].size(); j++) {
-                if (grid[i][j] == 2)
-                {
-                  q.push({{i,j},0});
-                  vis[i][j]=2;     
-                }
-                else
-                {
-                    vis[i][j]=0;
+    void dfs(vector<vector<int>>& grid, int i, int j, int t) {
+        if (i < 0 || j < 0 || i >= m || j >= n)
+            return;
+
+        if (grid[i][j] == 0)
+            return;
+
+        if (time[i][j] <= t)
+            return;
+
+        time[i][j] = t;
+
+        dfs(grid, i + 1, j, t + 1);
+        dfs(grid, i - 1, j, t + 1);
+        dfs(grid, i, j + 1, t + 1);
+        dfs(grid, i, j - 1, t + 1);
+    }
+
+    int orangesRotting(vector<vector<int>>& grid) {
+        m = grid.size();
+        n = grid[0].size();
+
+        time.assign(m, vector<int>(n, INT_MAX));
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 2) {
+                    dfs(grid, i, j, 0);
                 }
             }
         }
-        int tm=0;
-        int drow[]={-1,0,+1,0};
-        int dcol[]={0,+1,0,-1};
-        while(!q.empty())
-        {
-            int r= q.front().first.first;
-            int c= q.front().first.second;
-            int t= q.front().second;
-            tm= max(tm,t);
-            q.pop();
-            for(int i=0;i<4;i++)
-            {
-                int nrow =r+drow[i];
-                int ncol =c+dcol[i];
-                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && vis[nrow][ncol]!=2 &&grid[nrow][ncol]==1)
-                {
-                    q.push({{nrow,ncol},t+1});
-                    vis[nrow][ncol]=2;
-                }
 
+        int ans = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    if (time[i][j] == INT_MAX)
+                        return -1;
+
+                    ans = max(ans, time[i][j]);
+                }
             }
         }
-         for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < grid[0].size(); j++) {
-                if(vis[i][j]!=2 && grid[i][j]==1)
-                {
-                    return -1;
-                }
-            }
-         }
-        
 
-       return tm;
-
-        
+        return ans;
     }
 };
